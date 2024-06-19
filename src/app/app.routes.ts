@@ -6,12 +6,12 @@ import { ProductsComponent } from './components/products/products.component';
 import { ShopsComponent } from './components/shops/shops.component';
 import { LoginComponent } from './components/login/login.component';
 import { ShopDetailsComponent } from './components/shop-details/shop-details.component';
-import { adminLoggedGuard } from './guards/admin-logged.guard';
+import { AdminLoggedGuard } from './guards/admin-logged.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   // { path: 'about', component: AboutComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [adminLoggedGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AdminLoggedGuard] },
   { path: 'shops', component: ShopsComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
