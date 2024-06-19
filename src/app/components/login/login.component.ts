@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
@@ -12,14 +12,22 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
-  username: string = 'admin';
-  password: string = 'pa123';
+export class LoginComponent implements OnInit {
+  username: string = 'emilys'
+  password: string = 'emilyspass'
   errorMessage: string = '';
+  token!: string | null
+  user!: User | null
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
+  ngOnInit(): void {
+    this.authService.token$.subscribe(token => this.token = token)
+    this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
+  }
 
   login(username: string, password: string) {
     this.authService.login(username, password)
+    // username=''
+    // password=''
   }
 }

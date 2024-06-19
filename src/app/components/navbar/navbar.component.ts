@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-navbar',
@@ -12,18 +13,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-  token: string | null = '';
+  token!: string | null
+  user!: User | null
 
   constructor(
     private productService: ProductsService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.token$.subscribe((token: any) => {
       this.token = token;
       console.log('Token changed:', this.token); // Aggiungi questo per il debug
     })
+    this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
   }
 
   logout() {

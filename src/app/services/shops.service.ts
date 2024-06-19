@@ -8,24 +8,24 @@ import { Shop } from '../interfaces/shop';
   providedIn: 'root',
 })
 export class ShopsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private searchSubject = new BehaviorSubject<string>('');
   search$ = this.searchSubject.asObservable();
 
-  //private url = 'https://server-node-igna.vercel.app/shops';
-  private url = 'http://localhost:3000';
+  private url = 'https://gugliuzzadeployservernode-gruppostudioarces-projects.vercel.app';
+  // private url = 'http://localhost:3000';
 
   getShops(): Observable<Shop[]> {
-    return this.http.get<Shop[]>(this.url+"/shops");
-  }
-  
-  getShopsByCity(city: string): Observable<Shop[]> {
-    return this.http.get<Shop[]>(this.url+"/shops/"+city);
+    return this.http.get<Shop[]>(this.url + "/shops");
   }
 
-  addShop(shop: Shop){
-    return this.http.post<Shop>(this.url+"/shops", shop)
+  getShopsByCity(city: string): Observable<Shop[]> {
+    return this.http.get<Shop[]>(this.url + "/shops/" + city);
+  }
+
+  addShop(shop: Shop) {
+    return this.http.post<Shop>(this.url + "/shops", shop)
   }
 
   updateSearchTerm(term: string) {
