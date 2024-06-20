@@ -1,14 +1,9 @@
 <div class="container" class="text-center py-4">
-  <input
-    type="text"
-    placeholder="Cerca (ProductsComponent)"
-    [(ngModel)]="filtro"
-    class="w-75"
-  />
+  <input type="text" placeholder="Cerca (ProductsComponent)" [(ngModel)]="filtro" class="w-75" />
   <div class="grid">
     @for (product of filteredProducts; track $index) {
-    <div *ngIf="product.name.toLocaleLowerCase().includes(filtro)">
-      <app-product [product] = "product" (myEvent)="handleEvent($event)"></app-product>
+    <div *ngIf="product.name.toLowerCase().includes(filtro)">
+      <app-product [product]="product" (myEvent)="handleEvent($event)"></app-product>
     </div>
     }
   </div>

@@ -12,11 +12,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
-  @Input () product!: Product 
+  @Input() product!: Product
   @Output() myEvent = new EventEmitter<string>;
 
 
-emitEvent() {
-  this.myEvent.emit(this.product.name);
-}
+  emitEvent() {
+    this.myEvent.emit(this.product.name);
+  }
 }

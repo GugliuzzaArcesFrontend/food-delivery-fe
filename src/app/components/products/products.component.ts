@@ -9,7 +9,7 @@ import { ProductComponent } from '../product/product.component';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ NgFor, NgIf, FormsModule, ProductComponent],
+  imports: [NgFor, NgIf, FormsModule, ProductComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit {
   filteredProducts: Product[] = [];
   filtro: string = '';
 
-  constructor(private productService: ProductsService) {}
+  constructor(private productService: ProductsService) { }
 
   ngOnInit() {
     // Carica i prodotti all'inizializzazione
@@ -29,14 +29,13 @@ export class ProductsComponent implements OnInit {
     });
 
     this.productService.search$.subscribe(term => {
-      this.filteredProducts = this.products.filter(product => 
+      this.filteredProducts = this.products.filter(product =>
         product.name.toLowerCase().includes(term.toLowerCase())
       );
     });
   }
 
-
-handleEvent(event: string) {
-  console.log(event);
-}
+  handleEvent(event: string) {
+    console.log(event);
+  }
 }

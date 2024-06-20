@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +18,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['login'])
   }
 
   onSearch(event: Event): void {
