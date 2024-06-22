@@ -1,5 +1,7 @@
 <div class="container mt-4">
 	<p>Negozio n° {{id}}</p>
-	<p>Denominazione:</p>
+	<p>Denominazione: {{shop?.denominazione}}</p>
+	<p>Città: {{shop?.citta}}</p>
+	<button (click)="backClick()" type="button">Indietro</button>
 	<router-outlet />
 </div>

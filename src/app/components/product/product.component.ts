@@ -15,7 +15,6 @@ export class ProductComponent {
   @Input() product!: Product
   @Output() myEvent = new EventEmitter<string>;
 
-
   emitEvent() {
     this.myEvent.emit(this.product.name);
   }

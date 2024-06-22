@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ShopsService } from '../../services/shops.service';
+import { Shop } from '../../interfaces/shop';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-shop-details',
@@ -11,19 +14,25 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 export class ShopDetailsComponent implements OnInit, OnDestroy{
 
   id!: number;
+  shop?:Shop
   private sub: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router:Router,
+    private shopsService:ShopsService, 
+  ){}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id'];
-       // In a real app: dispatch action to load the details here.
-    });
+    this.sub = this.route.params.subscribe(params => 
+       this.id = params['shopId']
+    );
+    this.shopsService.getShopById(this.id).subscribe(shop=>this.shop=shop)
   }
-
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
+  backClick():void{
+    this.router.navigate(['shops'])
+  }
 }

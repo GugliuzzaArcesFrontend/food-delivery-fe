@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../interfaces/product';
 import { ProductComponent } from '../product/product.component';
+import { ActivatedRoute } from '@angular/router';
 // import items from '../data/products';
 
 @Component({
@@ -14,22 +15,35 @@ import { ProductComponent } from '../product/product.component';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
+  sub!: any;
+  shopId!: number;
+  products!: Product[];
+  filteredProducts!: Product[];
+  filter: string = '';
 
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
-  filtro: string = '';
-
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // Carica i prodotti all'inizializzazione
-    this.productService.getProducts().subscribe((data) => {
-      this.products = data;
-      this.filteredProducts = data;
+    // sottoscrive
+    this.sub = this.route.params.subscribe(params => {
+      this.shopId = +params['shopId'];
+      // In a real app: dispatch action to load the details here.
     });
-
+    if (!this.shopId) {
+      this.productService.getProducts().subscribe((products: Product[]) => {
+        this.products = products;
+        this.filteredProducts = products;
+      });      
+    }
+    else {
+      this.productService.getProductsByShopId(this.shopId).subscribe((products:Product[])=>{
+        this.products=products
+        this.filteredProducts=products
+      }
+    )
+    }
     this.productService.search$.subscribe(term => {
-      this.filteredProducts = this.products.filter(product =>
+      this.filteredProducts = this.products?.filter(product =>
         product.name.toLowerCase().includes(term.toLowerCase())
       );
     });

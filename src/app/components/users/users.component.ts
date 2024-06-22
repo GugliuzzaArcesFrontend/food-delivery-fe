@@ -15,25 +15,27 @@ import { FilterUserPipe } from '../../pipes/filter-user-pipe';
     TitleCasePipe
   ],
   template: `
-    <div class="row py-4 container text-center">
-      <div class="col">
-        <label for="user">Choose a User:</label>
+    <div class="row container "><!-- py-4  -->
+      <div class="col text-center ">
+        <label for="user">Mostra utenti:</label>
         <br>
         <select name="" class="my-4" [(ngModel)]="filter">
-            <option value=""selected>Tutti gli utenti</option>
+            <option value="">Tutti gli utenti</option>
             <option value="admin">Amministratori</option>
             <option value="moderator">Moderatori</option>
             <option value="user">Utenti</option>
-            <option value="!admin">Altri utenti</option>
+            <option value="lowrank">Altri utenti</option>
         </select>
         @for (user of users | filterUserPipe: filter; track $index) {
           <p>
-            {{user.firstName|titlecase}} {{user.lastName|titlecase}} 
-            @if(user.role=='admin'){: @if(user.gender=='male'){ Amministratore}@else {Amministratrice}}
-            @if(user.role=='moderator'){: @if(user.gender=='male'){Moderatore}@else{Moderatrice}}
+            {{user.firstName|titlecase}} {{user.lastName|titlecase}} :
+            @if(user.role=='admin'){@if(user.gender=='male'){ Amministratore}@else {Amministratrice}}
+            @if(user.role=='moderator'){@if(user.gender=='male'){Moderatore}@else{Moderatrice}}
+            @if(user.role=='user'){Utente}
           </p>
         }
       </div>
+      <div class="col" ></div>
     </div>
   `,
   styles: ``
@@ -41,7 +43,7 @@ import { FilterUserPipe } from '../../pipes/filter-user-pipe';
 
 export class UsersComponent implements OnInit {
   users!: User[]
-  filter: string = ''
+  filter: string='none'
   constructor(private usersService: UsersService) { }
   ngOnInit(): void {
     this.usersService.getUsers().subscribe(users => this.users = users)

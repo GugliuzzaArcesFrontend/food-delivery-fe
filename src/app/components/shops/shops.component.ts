@@ -4,12 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { Shop } from '../../interfaces/shop';
 import { ShopComponent } from '../shop/shop.component';
 import { ShopsService } from '../../services/shops.service';
-// import items from '../data/products';
 
 @Component({
   selector: 'app-shops',
   standalone: true,
-  imports: [ NgFor, NgIf, FormsModule, ShopComponent],
+  imports: [
+    NgFor,
+    NgIf,
+    FormsModule,
+    ShopComponent],
   templateUrl: './shops.component.html',
   styleUrl: './shops.component.css',
 })
