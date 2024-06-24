@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../interfaces/product';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -28,5 +29,8 @@ export class ProductDetailsComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe()
+  }
+  navback():void{
+    this.location.back()
   }
 }
