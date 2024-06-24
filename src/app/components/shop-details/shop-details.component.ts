@@ -25,14 +25,14 @@ export class ShopDetailsComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => 
-       this.id = params['shopId']
+       this.id = params['shopId'/* confrontare sempre il parametro di rotta con app.routes o subroutes pertinenti*/]
     );
     this.shopsService.getShopById(this.id).subscribe(shop=>this.shop=shop)
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-  backClick():void{
+  navback():void{
     this.router.navigate(['shops'])
   }
 }
