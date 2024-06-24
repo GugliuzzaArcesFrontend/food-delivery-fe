@@ -20,10 +20,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private location:Location
-  ) { }
+  ) {}
   
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => this.id = params['productId']);
+    this.sub = this.route.params.subscribe(params => this.id = params['productId'/* confrontare sempre con app.routes o subroutes pertinenti*/]);
     this.productsService.getProductById(this.id).subscribe((product: Product) => this.product = product)
   }
   
