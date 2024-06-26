@@ -50,7 +50,6 @@ export class AuthService {
     });
   }
 
-
   logout() {
     localStorage.removeItem('token');
     this.tokenSubject.next(null);
@@ -61,5 +60,4 @@ export class AuthService {
   getToken(): string | null {
     return this.tokenSubject.value;
   }
-
 }

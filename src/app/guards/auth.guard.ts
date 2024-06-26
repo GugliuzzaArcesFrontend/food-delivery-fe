@@ -14,7 +14,7 @@ export const adminLoggedGuard:CanActivateFn=():boolean=>{
         if(authedUser.role=='admin')
             return true;
         else{
-            router.navigate(['login']);
+            router.navigate(['unauthorized']);
             return false;
         }
     }

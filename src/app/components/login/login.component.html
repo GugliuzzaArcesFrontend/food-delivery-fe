@@ -16,6 +16,7 @@
 	</div>
 </div>
 <ng-template #logoutTemplate>
-	@if(user?.gender=='male'){Benvenuto @if(user?.role=='admin'){
-	amministratore}}@else{Benvenuta@if(user?.role=='admin'){ amministratrice}} {{user?.firstName}} {{user?.lastName}}
+	<p>@if(user?.gender=='male'){Benvenuto @if(user?.role=='admin'){
+	amministratore}}@else{Benvenuta@if(user?.role=='admin'){ amministratrice}} {{user?.firstName}} {{user?.lastName}}</p>
+		<button type="button" (click)="logOut()">Log Out</button>
 </ng-template>

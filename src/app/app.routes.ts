@@ -8,6 +8,7 @@ import { ShopDetailsComponent } from './components/shop-details/shop-details.com
 import { UsersComponent } from './components/users/users.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { adminLoggedGuard, authGuard } from './guards/auth.guard';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,11 +19,11 @@ export const routes: Routes = [
     canActivate: [adminLoggedGuard, authGuard]
   },
   {
-    path: 'shops',loadChildren:()=>import('./routes/shop.routes').then(m=>m.shopRoutes)
+    path: 'shops', loadChildren: () => import('./routes/shop.routes').then(m => m.shopRoutes)
   },
   {
     path: 'products',
-    loadChildren:()=>import('./routes/products.routes').then(m=>m.productRoutes)
+    loadChildren: () => import('./routes/products.routes').then(m => m.productRoutes)
     , /* children: [
       { path: '', loadComponent: () => import('./components/products/products.component').then(m => m.ProductsComponent) },
       { path: ':productId', loadComponent:()=>import('./components/product-details/product-details.component').then(m=>m.ProductDetailsComponent)}
@@ -30,5 +31,6 @@ export const routes: Routes = [
   },
   { path: 'users', component: UsersComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
 ];
