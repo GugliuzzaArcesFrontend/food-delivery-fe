@@ -4,6 +4,7 @@ import { ProductsService } from '../../services/products.service';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,8 @@ import { User } from '../../interfaces/user';
 export class NavbarComponent implements OnInit {
   token!: string | null
   user!: User | null
+  cartqtt$?:Observable<number>
+  cartqtt?:number
 
   constructor(
     private productService: ProductsService,
@@ -28,6 +31,8 @@ export class NavbarComponent implements OnInit {
       console.log('Token changed:', this.token); // Aggiungi questo per il debug
     })
     this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
+    this.cartqtt$=of(this.user?.cart?.reduce((acc,product)=>acc+product.qntt,0))
+    this.cartqtt$.subscribe(i=>this.cartqtt=i)
   }
 
   logout() {

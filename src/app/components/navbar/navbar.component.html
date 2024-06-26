@@ -28,7 +28,7 @@
         <a class="nav-link" routerLink="/login">Login</a>
       </li>
       <li class="nav-item" *ngIf="token">
-        <a class="nav-link" routerLink="" (click)="logout()">{{user?.firstName}} {{user?.lastName}} (Logout)</a>
+        <a class="nav-link">{{user?.firstName}} {{user?.lastName}}({{cartqtt}})</a><a class="nav-link" (click)="logout()">(Logout)</a>
       </li>
       <!-- <input (input)="onSearch($event)" class="form-control mr-sm-2" type="search" placeholder="Cerca"aria-label="Cerca"> -->
     </ul>

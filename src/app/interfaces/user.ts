@@ -7,4 +7,5 @@ export interface User {
     gender?: string,
     firstName?: string,
     lastName?: string
+    cart?:any[]
 }

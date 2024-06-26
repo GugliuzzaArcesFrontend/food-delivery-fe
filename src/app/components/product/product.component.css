@@ -1,14 +1,28 @@
-.example-card {
-    max-width: 300px;
-    min-height: 250px;
-    margin: 20px;
-  }
-  
-  .example-header-image {
-    background-image: url('https://as1.ftcdn.net/v2/jpg/03/16/30/30/1000_F_316303014_qzT0VBwBMuIDOzTjEpvcuKvIoEo0Yz1E.jpg');
-    background-size: cover;
-  }
-  
-  .white{
-    color: whitesmoke;
-  }
+.custContainer{
+  padding: 2% 2% 2% 2%;
+  margin: 2% 2% 2% 2%;
+  box-sizing: border-box;
+  height: 300px;
+  border: #000, solid, 2px;
+  border-radius: 6px;
+  background-color: #000;
+}
+.card{
+  height: 100%;
+}
+.details{
+  height: 90% ;
+  margin: 1%;  
+}
+#minus{
+  width:15%;
+}
+#qnt{
+  width: 70%;
+}
+#plus{
+  width:15%
+}
+#cartAdd{
+  width: 100%;
+}

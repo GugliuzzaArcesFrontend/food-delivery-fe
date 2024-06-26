@@ -22,7 +22,8 @@ export const adminLoggedGuard:CanActivateFn=():boolean=>{
 export const authGuard:CanActivateFn=():boolean=>{
     const authService=inject(AuthService);
     const router=inject(Router);
-    let token!:string|null;authService.token$.subscribe(token$=>token=token$);
+    let token!:string|null;
+    authService.token$.subscribe(token$=>token=token$);
     if(token)
         return true;
     else {
