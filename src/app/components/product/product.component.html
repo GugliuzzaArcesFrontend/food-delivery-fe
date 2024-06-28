@@ -28,13 +28,16 @@
       <div class="card-header">
         <h3>{{product.name}}</h3>
         <h4>{{product.availability}}</h4>
+        <p>{{product.price}}</p>
       </div>
     </div>
-    <div class="cartActions">
-      <button id='minus' type="button" (click)="decrease()">-</button>
-      <input id='qnt' type="number" [(ngModel)]="quantity">
-      <button id="plus" type="button" (click)="increase()">+</button>
-      <button id="cartAdd" type="button" (click)="addToCart(quantity,product.id)">Aggiungi al carrello</button>
-    </div>
+    <form (ngSubmit)="addToCart(quantity,product.id)">
+      <div class="cartActions">
+        <button id='minus' type="button" (click)="decrease()">-</button>
+        <input id='quantity' type="number" name="quantity" [(ngModel)]="quantity">
+        <button id="plus" type="button" (click)="increase()">+</button>
+        <button id="cartAdd" type="submit">Aggiungi al carrello</button>
+      </div>
+    </form>
   </div>
 </div>

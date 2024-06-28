@@ -17,12 +17,15 @@ export class ProductComponent {
   
   @Input() product!: Product;
   quantity:number=0;
+  productId!:number
   @Output() myEvent = new EventEmitter<string>;
   constructor(private productsService:ProductsService){}
 
-  addToCart(quantity:number,productId:number):void{
-    this.productsService.addToCart(quantity,productId)
-    this.quantity=0
+  addToCart(quantityFn:number,productId:number):void{
+    if(quantityFn<=this.product.availability){this.productsService.addToCart(quantityFn,productId);}
+    else
+    {console.log('ne stai ordinando più di quanti ne hanno');}    
+    this.quantity=0;
   };
 
   decrease():void{

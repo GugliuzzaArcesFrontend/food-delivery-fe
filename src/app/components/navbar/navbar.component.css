@@ -26,7 +26,9 @@
 .navbar-toggler {
   border: none;
 }
-
+a{
+  display: inline;
+}
 
 
 /* 

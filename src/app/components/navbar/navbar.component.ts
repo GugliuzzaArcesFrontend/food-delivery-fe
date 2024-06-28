@@ -16,7 +16,7 @@ import { Observable, of } from 'rxjs';
 export class NavbarComponent implements OnInit {
   token!: string | null
   user!: User | null
-  cartqtt$?:Observable<number>
+  cartqtt$?:Observable<number|undefined>
   cartqtt?:number
 
   constructor(

@@ -7,3 +7,7 @@ export interface Product {
   availability: number;
   shopId: number;
 }
+export interface CartItem{
+  pid:number,
+  qntt:number,
+}

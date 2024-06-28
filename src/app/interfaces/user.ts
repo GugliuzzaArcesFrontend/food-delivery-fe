@@ -1,3 +1,5 @@
+import { CartItem } from "./product"
+
 export interface User {
     id: number,
     username: string,
@@ -7,5 +9,5 @@ export interface User {
     gender?: string,
     firstName?: string,
     lastName?: string
-    cart?:any[]
+    cart?:CartItem[]
 }

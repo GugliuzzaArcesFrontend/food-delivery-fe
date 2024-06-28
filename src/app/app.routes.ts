@@ -5,12 +5,16 @@ import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { adminLoggedGuard, authGuard } from './guards/auth.guard';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { CartComponent } from './components/cart/cart.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'userpage', component: UserPageComponent },
+  { path: 'cart', component: CartComponent },
   // { path: 'about', component: AboutComponent },
   {
-    path: 'dashboard', 
+    path: 'dashboard',
     loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
     canActivate: [adminLoggedGuard, authGuard]
   },
