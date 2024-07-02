@@ -5,6 +5,7 @@ import { Product } from '../../interfaces/product';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -19,13 +20,12 @@ export class ProductComponent {
   quantity:number=0;
   productId!:number
   @Output() myEvent = new EventEmitter<string>;
-  constructor(private productsService:ProductsService){}
+  constructor(private productsService:ProductsService, private cartService:CartService){}
 
-  addToCart(quantityFn:number,productId:number):void{
-    if(quantityFn<=this.product.availability){this.productsService.addToCart(quantityFn,productId);}
-    else
-    {console.log('ne stai ordinando più di quanti ne hanno');}    
-    this.quantity=0;
+  addToCart(quantity:number,product:Product):void{
+    if(quantity===0)console.log('finiscila i cugghiuniari');
+    if(quantity>this.product.availability)console.log('ne stai ordinando più di quanti ne hanno');    
+    if(quantity<=this.product.availability&&quantity!=0){this.cartService.addToCart(quantity,product);this.quantity=0;}
   };
 
   decrease():void{
@@ -39,4 +39,5 @@ export class ProductComponent {
   emitEvent() {
     this.myEvent.emit(this.product.name);
   };
+  
 }

@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { NgFor } from '@angular/common';
 import { ProductsService } from '../../services/products.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,8 +22,9 @@ import { ProductsService } from '../../services/products.service';
 export class CartComponent implements OnInit {
   user!: User
 
-  constructor(private authService: AuthService, private productsService: ProductsService) { }
+  constructor(private authService: AuthService, private productsService: ProductsService, private cartService:CartService) { }
   ngOnInit(): void {
     this.authService.authedUser$.subscribe(user => this.user = user != null ? JSON.parse(user) : undefined)
+    this.cartService.getCartItems()
   }
 }

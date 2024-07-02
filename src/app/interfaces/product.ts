@@ -8,6 +8,8 @@ export interface Product {
   shopId: number;
 }
 export interface CartItem{
-  pid:number,
-  qntt:number,
+  // pid:number,
+  // qntt:number,
+  product:Product,
+  quantity:number
 }

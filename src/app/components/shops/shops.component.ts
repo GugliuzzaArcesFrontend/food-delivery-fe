@@ -16,13 +16,14 @@ import { ShopsService } from '../../services/shops.service';
   templateUrl: './shops.component.html',
   styleUrl: './shops.component.css',
 })
+
 export class ShopsComponent implements OnInit {
 
   shops: Shop[] = [];
   filteredShops: Shop[] = [];
   filtro: string = '';
 
-  constructor(private shopsService: ShopsService) {}
+  constructor(private shopsService: ShopsService) { }
 
   ngOnInit() {
     // Carica i prodotti all'inizializzazione
@@ -32,14 +33,13 @@ export class ShopsComponent implements OnInit {
     });
 
     this.shopsService.search$.subscribe(term => {
-      this.filteredShops = this.shops.filter(shop => 
+      this.filteredShops = this.shops.filter(shop =>
         shop.denominazione.toLowerCase().includes(term.toLowerCase())
       );
     });
   }
 
-
-handleEvent(event: string) {
-  console.log(event);
-}
+  handleEvent(event: string) {
+    console.log(event);
+  }
 }

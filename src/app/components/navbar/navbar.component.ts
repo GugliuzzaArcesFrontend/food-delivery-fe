@@ -28,10 +28,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.authService.token$.subscribe((token: any) => {
       this.token = token;
-      console.log('Token changed:', this.token); // Aggiungi questo per il debug
     })
     this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
-    this.cartqtt$=of(this.user?.cart?.reduce((acc,product)=>acc+product.qntt,0))
+    this.cartqtt$=of(this.user?.cart?.reduce((acc,product)=>acc+product.quantity,0))
     this.cartqtt$.subscribe(i=>this.cartqtt=i)
   }
 

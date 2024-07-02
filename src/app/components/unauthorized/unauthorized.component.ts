@@ -11,6 +11,7 @@ import { LoginComponent } from '../login/login.component';
   `,
   styles: ``
 })
+
 export class UnauthorizedComponent {
 
 }

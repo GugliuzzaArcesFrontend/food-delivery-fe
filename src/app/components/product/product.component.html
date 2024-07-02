@@ -31,7 +31,7 @@
         <p>{{product.price}}</p>
       </div>
     </div>
-    <form (ngSubmit)="addToCart(quantity,product.id)">
+    <form (ngSubmit)="addToCart(quantity,product)">
       <div class="cartActions">
         <button id='minus' type="button" (click)="decrease()">-</button>
         <input id='quantity' type="number" name="quantity" [(ngModel)]="quantity">

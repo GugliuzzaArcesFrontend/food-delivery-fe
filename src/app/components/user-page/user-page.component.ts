@@ -13,6 +13,7 @@ import { User } from '../../interfaces/user';
   `,
   styles: ``
 })
+
 export class UserPageComponent implements OnInit{
   user!:User
   constructor(private authService:AuthService){}
