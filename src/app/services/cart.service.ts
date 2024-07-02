@@ -4,27 +4,28 @@ import { CartItem, Product } from '../interfaces/product';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
 
-  private cartItemSignal=signal<CartItem[]>([])
+  private cartItemSignal = signal<CartItem[]>([])
 
-  
-  get cartItems(){
+  get cartItems() {
     return this.cartItemSignal();
   }
-  constructor(){}
-  
-  addToCart(quantity:number,product:Product, ){
-    const existingItem=this.cartItemSignal().find(item=>item.product.id===product.id);
-    if (existingItem){
+
+  constructor() { }
+
+  addToCart(quantity: number, product: Product) {
+    const existingItem = this.cartItemSignal().find(item => item.product.id === product.id);
+    if (existingItem) {
       existingItem.quantity += quantity;
     }
     else {
-      this.cartItemSignal.update(cartItems=>[...cartItems, {product, quantity:quantity}])
+      this.cartItemSignal.update(cartItems => [...cartItems, { product, quantity: quantity }])
     }
-    console.log(this.cartItemSignal());    
   }
-  getCartItems():CartItem[]{
+  
+  getCartItems(): CartItem[] {
     return this.cartItemSignal()
   }
 }

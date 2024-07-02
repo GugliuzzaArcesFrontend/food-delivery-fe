@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { Observable, of } from 'rxjs';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../interfaces/product';
 
 @Component({
   selector: 'app-navbar',
@@ -14,15 +16,15 @@ import { Observable, of } from 'rxjs';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-  token!: string | null
-  user!: User | null
-  cartqtt$?:Observable<number|undefined>
-  cartqtt?:number
+  token!: string | null;
+  user!: User | null;
+  cart:CartItem[]=[];
+  cartqntt= signal<number>(this.cart.reduce((acc,product)=>acc+product.quantity,0))
 
   constructor(
-    private productService: ProductsService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cartService:CartService
   ) { }
 
   ngOnInit() {
@@ -30,18 +32,11 @@ export class NavbarComponent implements OnInit {
       this.token = token;
     })
     this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
-    this.cartqtt$=of(this.user?.cart?.reduce((acc,product)=>acc+product.quantity,0))
-    this.cartqtt$.subscribe(i=>this.cartqtt=i)
+    this.cart=this.cartService.cartItems
   }
 
   logout() {
     this.authService.logout();
     this.router.navigate(['login'])
-  }
-
-  onSearch(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.productService.updateSearchTerm(input.value);
-    console.log(input.value);
   }
 }

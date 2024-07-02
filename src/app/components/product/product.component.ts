@@ -31,11 +31,10 @@ export class ProductComponent {
   };
 
   increase():void{
-    this.quantity+=1
+    if(this.quantity<this.product.availability)this.quantity+=1
   };
   
   emitEvent() {
     this.myEvent.emit(this.product.name);
   };
-  
 }

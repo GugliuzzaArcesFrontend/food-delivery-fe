@@ -19,13 +19,13 @@ import { CartItem } from '../../interfaces/product';
   `,
   styles: ``
 })
+
 export class CartComponent implements OnInit {
   // user!: User
-  cart!:CartItem[]
-
-  constructor(private authService: AuthService, private productsService: ProductsService, private cartService:CartService) { }
+  cart!:CartItem[];
+  constructor(private authService: AuthService, private productsService: ProductsService, private cartService:CartService){};
   ngOnInit(): void {
     // this.authService.authedUser$.subscribe(user => this.user = user != null ? JSON.parse(user) : undefined)
-    this.cart=this.cartService.getCartItems()
+    this.cart=this.cartService.getCartItems();
   }
 }
