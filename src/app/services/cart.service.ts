@@ -5,12 +5,14 @@ import { CartItem, Product } from '../interfaces/product';
   providedIn: 'root'
 })
 export class CartService {
+
   private cartItemSignal=signal<CartItem[]>([])
 
-  constructor() { }
+  
   get cartItems(){
     return this.cartItemSignal();
   }
+  constructor(){}
   
   addToCart(quantity:number,product:Product, ){
     const existingItem=this.cartItemSignal().find(item=>item.product.id===product.id);
@@ -22,7 +24,7 @@ export class CartService {
     }
     console.log(this.cartItemSignal());    
   }
-  getCartItems():void{
-    
+  getCartItems():CartItem[]{
+    return this.cartItemSignal()
   }
 }

@@ -1,16 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { Product } from '../../interfaces/product';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
 import { CartService } from '../../services/cart.service';
+import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, RouterLink, FormsModule],
+  imports: [ RouterLink, FormsModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
