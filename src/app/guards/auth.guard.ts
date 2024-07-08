@@ -5,8 +5,8 @@ import{User}from'../interfaces/user';
 export const adminLoggedGuard:CanActivateFn=():boolean=>{
     const authService=inject(AuthService);
     const router=inject(Router);
-    let authedUser!:User;
-    authService.authedUser$.subscribe(user=>authedUser=user!=null?JSON.parse(user):null);
+    let authedUser!:User|null;
+    authService.authedUser$.subscribe(user=>authedUser=user);
     if(!authedUser){
         router.navigate(['login']);return false
     }

@@ -29,7 +29,7 @@
       </li>
       <li class="nav-item" *ngIf="token">
         <a routerLink="userpage" class="nav-link">{{user?.firstName}} {{user?.lastName}}</a>
-        <a class="nav-link" routerLink="cart">(Carrello:{{cartqntt()}})</a>
+        <a class="nav-link" routerLink="cart">(Carrello:{{cartqntt}})</a>
         <a routerLink="" class="nav-link" (click)="logout()">(Logout)</a>
       </li>
       <!-- <input (input)="onSearch($event)" class="form-control mr-sm-2" type="search" placeholder="Cerca"aria-label="Cerca"> -->

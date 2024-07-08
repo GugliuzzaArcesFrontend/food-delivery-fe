@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   token!: string | null;
   user!: User | null;
   cart:CartItem[]=[];
-  cartqntt= signal<number>(this.cart.reduce((acc,product)=>acc+product.quantity,0))
+  cartqntt:number=0
 
   constructor(
     private authService: AuthService,
@@ -31,8 +31,9 @@ export class NavbarComponent implements OnInit {
     this.authService.token$.subscribe((token: any) => {
       this.token = token;
     })
-    this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
+    this.authService.authedUser$.subscribe((user: User | null) => this.user = user)
     this.cart=this.cartService.cartItems
+    this.cartqntt=this.cartService.cartQuantity
   }
 
   logout() {

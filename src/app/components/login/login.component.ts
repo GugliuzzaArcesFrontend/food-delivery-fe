@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService, private router:Router) { }
   ngOnInit(): void {
     this.authService.token$.subscribe(token => this.token = token)
-    this.authService.authedUser$.subscribe((user: string | null) => this.user = user != null ? JSON.parse(user) : null)
+    this.authService.authedUser$.subscribe((user: User | null) => this.user = user)
   }
 
   login(username: string, password: string) {

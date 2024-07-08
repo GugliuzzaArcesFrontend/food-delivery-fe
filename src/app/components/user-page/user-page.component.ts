@@ -8,16 +8,16 @@ import { User } from '../../interfaces/user';
   imports: [],
   template: `
     <p>
-      user-page works! {{user.id+' '+user.firstName+' '+user.lastName}}
+      user-page works! {{user?.id+' '+user?.firstName+' '+user?.lastName}}
     </p>
   `,
   styles: ``
 })
 
 export class UserPageComponent implements OnInit{
-  user!:User
+  user!:User|null
   constructor(private authService:AuthService){}
   ngOnInit(): void {
-    this.authService.authedUser$.subscribe(user=>this.user=user!=null?JSON.parse(user):undefined)
+    this.authService.authedUser$.subscribe(user=>this.user=user)
   }
 }

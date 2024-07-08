@@ -18,7 +18,7 @@ export class ProductsService {
   // private url = 'http://localhost:3000/';
   
   constructor(private http: HttpClient, private authService:AuthService) {
-    this.authService.authedUser$.subscribe(user=> this.authedUser=user!=null?JSON.parse(user):null)
+    this.authService.authedUser$.subscribe(user=> this.authedUser=user)
   }
 
   getProducts():Observable<Product[]>{
