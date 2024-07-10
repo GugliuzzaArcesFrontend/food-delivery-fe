@@ -22,7 +22,11 @@ export class CartService {
   addToCart(quantity: number, product: Product) {
     const existingItem = this.cartItemSignal().find(item => item.product.id === product.id);
     if (existingItem) {
-      existingItem.quantity += quantity;
+      // existingItem.quantity += quantity;
+      this.cartItemSignal.update(cartItems=>cartItems.map(
+        item=>item.product.id===product.id
+        ?{...item, quantity:item.quantity+quantity}
+        :item))
     }
     else {
       this.cartItemSignal.update(cartItems => [...cartItems, { product, quantity: quantity }])

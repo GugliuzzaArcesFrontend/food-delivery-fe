@@ -22,7 +22,7 @@ export class ProductComponent {
 
   addToCart(quantity:number,product:Product):void{
     if(quantity===0)console.log('finiscila i cugghiuniari');
-    if(quantity>this.product.availability)console.log('ne stai ordinando più di quanti ne hanno');    
+    if(quantity>this.product.availability){console.log('ne stai ordinando più di quanti ne hanno');alert('Non ordinare più di quanti ne hanno');this.quantity=0};    
     if(quantity<=this.product.availability&&quantity!=0){this.cartService.addToCart(quantity,product);this.quantity=0;}
   };
 

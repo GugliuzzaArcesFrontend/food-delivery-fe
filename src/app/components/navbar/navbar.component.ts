@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { NgIf } from '@angular/common';
@@ -25,7 +25,13 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cartService:CartService
-  ) { }
+  ) {
+    effect(()=>{
+      this.cartqntt=this.cartService.getCartItems().reduce((acc,item)=>{
+        return acc+item.quantity
+      },0)
+    })
+   }
 
   ngOnInit() {
     this.authService.token$.subscribe((token: any) => {

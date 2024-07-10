@@ -14,7 +14,7 @@ export class AuthService {
   private url = environment.apiUrl
 
   private tokenSubject: BehaviorSubject<string | null>;
-  public token$: Observable<string | null>;
+  public token$: Observable<string|null>;
   token?: string | null
 
   private authedUserSubject: BehaviorSubject<User | null>
@@ -38,7 +38,7 @@ export class AuthService {
       password: password,
     };
 
-    this.http.post(this.url + '/login', loginData).subscribe({
+    this.http.post(this.url + '/login', /* loginData */{"username":username,"password":password}).subscribe({
       next: (response: any) => {
         //this.errorMessage = "";
         localStorage.setItem('token', response.token);
