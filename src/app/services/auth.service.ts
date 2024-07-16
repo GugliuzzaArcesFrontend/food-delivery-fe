@@ -31,7 +31,7 @@ export class AuthService {
     this.authedUser$ = this.authedUserSubject.asObservable();
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string){
 
     const loginData = {
       username: username,
@@ -62,6 +62,7 @@ export class AuthService {
   getToken(): string | null {
     return this.tokenSubject.value;
   }
+
   userInit(): void {
     let token = localStorage.getItem('token')
     if (token) {
