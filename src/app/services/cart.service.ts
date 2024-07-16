@@ -13,7 +13,7 @@ export class CartService {
   get cartItems() {
     return this.cartItemSignal();
   }
-  
+
   get cartQuantity(){
     return this.cartQuantitySignal();
   }
@@ -41,6 +41,7 @@ export class CartService {
       this.cartItemSignal.update(cartItems => [...cartItems, { product, quantity: quantity }])
     }
   }
+  
   incrementCart(id:number):void{
     this.cartItemSignal.update(cartItems=>
       cartItems.map(
@@ -48,13 +49,15 @@ export class CartService {
       )
     )
   };
+
   decrementCart(id:number):void{
     this.cartItemSignal.update(cartItems=>
       cartItems.map(
-        item=>item.product.id===id?{...item,quantity:item.quantity-1}:item
+        item=>{if(item.quantity>0){return item.product.id===id?{...item,quantity:item.quantity-1}:item}else{return item}}
       )
     )
   };
+
   removeFromCart():void{    
   }  
   getCartItems(): CartItem[] {

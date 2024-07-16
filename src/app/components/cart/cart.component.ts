@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     @for (product of cart; track $index) {
       <button type="button" (click)="decrementCart(product.product.id)">Cala</button>
       <p>{{product.product.name}} in numero: <input type="number" [(ngModel)]="product.quantity"></p>
+      <p>Prezzo oggetto:{{product.product.price*product.quantity|currency:'EUR'}}</p>
       <button type="button" (click)="incrementCart(product.product.id)">Aumenta</button>
       <br>
     }
