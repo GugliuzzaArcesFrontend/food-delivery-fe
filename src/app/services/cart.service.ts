@@ -1,72 +1,56 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { CartItem, Product } from '../interfaces/product';
+import{Injectable,signal}from'@angular/core';
+import{CartItem,Product}from'../interfaces/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn:'root'
 })
 
-export class CartService {
+export class CartService{
 
-  private cartItemSignal = signal<CartItem[]>([])
-  private cartQuantitySignal=signal<number>(this.getCartQuantity())
+  cartItemsSignal=signal<CartItem[]>([]);
 
-  get cartItems() {
-    return this.cartItemSignal();
-  }
+  constructor(){}
 
-  get cartQuantity(){
-    return this.cartQuantitySignal();
-  }
-
-  cartCount=computed(()=>{
-    return this.cartItemSignal().reduce((acc,item)=>acc+item.quantity,0)
-  })
-
-  cartTotal=computed(()=>{
-    return this.cartItemSignal().reduce((acc,item)=>acc+item.quantity*item.product.price,0)
-  })
-
-  constructor() { }
-
-  addToCart(quantity: number, product: Product) {
-    const existingItem = this.cartItemSignal().find(item => item.product.id === product.id);
-    if (existingItem) {
+  addToCart(quantity:number,product:Product){
+    const existingItem=this.cartItemsSignal().find(item=>item.product.id===product.id);
+    if(existingItem){
       // existingItem.quantity += quantity;
-      this.cartItemSignal.update(cartItems=>cartItems.map(
-        item=>item.product.id===product.id
-        ?{...item, quantity:item.quantity+quantity}
-        :item))
-    }
-    else {
-      this.cartItemSignal.update(cartItems => [...cartItems, { product, quantity: quantity }])
-    }
-  }
-  
-  incrementCart(id:number):void{
-    this.cartItemSignal.update(cartItems=>
-      cartItems.map(
-        item=>item.product.id===id?{...item,quantity:item.quantity+1}:item
-      )
-    )
+      this.cartItemsSignal.update(cartItems=>cartItems.map(
+        item=>
+          item.product.id===product.id
+          ?{...item,quantity:item.quantity+quantity}
+          :item))
+    }else{
+      this.cartItemsSignal.update(cartItems=>[...cartItems,{product,quantity:quantity}])
+    };
   };
+
+  incrementCart(id:number):void{
+    this.cartItemsSignal.update(cartItems=>cartItems.map(item=>
+        item.product.id===id
+        ?{...item,quantity:item.quantity+1}
+        :item
+  ))};
 
   decrementCart(id:number):void{
-    this.cartItemSignal.update(cartItems=>
-      cartItems.map(
-        item=>{if(item.quantity>0){return item.product.id===id?{...item,quantity:item.quantity-1}:item}else{return item}}
-      )
-    )
+    this.cartItemsSignal.update(cartItems=>cartItems.map(item=>{
+      if(item.quantity>0){
+        return item.product.id===id
+          ?{...item,quantity:item.quantity-1}
+          :item
+      }else{
+        return item
+      }
+    }));
   };
 
-  removeFromCart():void{    
-  }  
-  getCartItems(): CartItem[] {
-    return this.cartItemSignal()    
-  }
+  /* cartRemove(id:number):void{
+    const index=this.cartItemsSignal().findIndex((item:any)=>item.product.id===id);
+    this.cartItemsSignal().splice(index,1);
+    this.cartItemsSignal.update(cartItems=>[...cartItems]);
+  } */
 
-  getCartQuantity(){
-    return this.cartItemSignal().reduce(
-      (acc,item)=>acc+item.quantity,0
-    )
-  }
+  cartRemove(id:number):void{this.cartItemsSignal.update(cartItems => cartItems.filter(item => item.product.id != id))};
+
+  emptyCart():void{this.cartItemsSignal.update(()=>[])};
 }
