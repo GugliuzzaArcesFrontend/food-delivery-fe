@@ -45,9 +45,9 @@ export class CartComponent implements OnInit {
     private cartService: CartService
   ){
     effect(() => {
-      this.cartPrice = cartService.cartItemsSignal().reduce((acc,item)=>acc+item.quantity*item.product.price,0);
-      this.cart = cartService.cartItemsSignal()
-      this.deliveryPrice = cartService.cartItemsSignal().reduce((acc, item) => acc + item.quantity * 1.5, 1)
+      this.cartPrice = cartService.CartItems.reduce((acc,item)=>acc+item.quantity*item.product.price,0);
+      this.cart = cartService.CartItems
+      this.deliveryPrice = cartService.CartItems.reduce((acc, item) => acc + item.quantity * 1.5, 1)
       this.finalPrice = this.cartPrice + this.deliveryPrice
     })
   };

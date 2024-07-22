@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
     private cartService:CartService
   ){
     effect(()=>{
-      this.cartqntt=this.cartService.cartItemsSignal().reduce((acc,item)=>{
+      this.cartqntt=this.cartService.CartItems.reduce((acc,item)=>{
         return acc+item.quantity
       },0)
     })

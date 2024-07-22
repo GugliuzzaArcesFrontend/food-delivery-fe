@@ -7,8 +7,12 @@ import{CartItem,Product}from'../interfaces/product';
 
 export class CartService{
 
-  cartItemsSignal=signal<CartItem[]>([]);
+  private cartItemsSignal=signal<CartItem[]>([]);
 
+  get CartItems(){
+    return this.cartItemsSignal()
+  }
+  
   constructor(){}
 
   addToCart(quantity:number,product:Product){
